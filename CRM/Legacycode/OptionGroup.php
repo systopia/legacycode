@@ -42,7 +42,7 @@ class CRM_Legacycode_OptionGroup {
    *
    * @throws Exception
    */
-  public static function getOptionValue($group_name, $label, $label_field = 'label', $label_type = 'String', $value_field = 'value')
+  public static function getValue($group_name, $label, $label_field = 'label', $label_type = 'String', $value_field = 'value')
   {
     if (empty($label) || empty($group_name)) {
       return NULL;

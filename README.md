@@ -15,7 +15,10 @@ function did, but in a clean and up-to-date way. Since that might be a lot of wo
 we designed this extension to offer a quick, temporary solution to your
 extensions' compatibility issues.
 
-# How To Use (Instructions)
+## Requirements
+
+* PHP v7.4+
+* CiviCRM 5.45+
 
 ## Find out if your extension might have a compatibility problem:
 
@@ -38,15 +41,10 @@ is part of it's dependencies, i.e. add the following to your extensions' ``info.
 
 ## Function Replacements
 
-| Function                                         |                Replacement                 | Deprecated Since | Dropped Since |
-|--------------------------------------------------|:------------------------------------------:|-----------------:|---------------|
-| ``CRM_Core_OptionGroup::getValue``               | CRM_Legacycode_OptionGroup::getOptionValue |                ? | 5.60          |
-| ``CRM_Contact_BAO_Contact::contactTrashRestore`` |                    todo                    |                ? | 5.60          |
-| ``CRM_Core_DAO::checkFieldExists``               |                    todo                    |                ? | 5.60          |
-| (more to come)                                   |                    todo                    |                ? | 5.60          |
+| Function                                         |              Replacement              | Deprecated Since | Dropped Since |
+|--------------------------------------------------|:-------------------------------------:|-----------------:|---------------|
+| ``CRM_Core_OptionGroup::getValue``               | CRM_Legacycode_OptionGroup::getValue  |                ? | 5.60          |
+| ``CRM_Contact_BAO_Contact::contactTrashRestore`` |                 todo                  |                ? | 5.60          |
+| ``CRM_Core_DAO::checkFieldExists``               |                 todo                  |                ? | 5.60          |
+| (more to come)                                   |                 todo                  |                ? | 5.60          |
 
-
-## Requirements
-
-* PHP v7.4+
-* CiviCRM 5.45+
