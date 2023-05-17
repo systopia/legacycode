@@ -44,6 +44,7 @@ is part of it's dependencies, i.e. add the following to your extensions' ``info.
 | Function                                         |             Replacement              | Deprecated Since | Dropped Since |
 |--------------------------------------------------|:------------------------------------:|-----------------:|---------------|
 | ``CRM_Core_OptionGroup::getValue``               | CRM_Legacycode_OptionGroup::getValue |                ? | 5.60          |
+| ``CRM_Core_OptionGroup::getLabel``               | CRM_Legacycode_OptionGroup::getLabel |                ? | 5.60          |
 | ``CRM_Contact_BAO_Contact::contactTrashRestore`` |                 todo                 |                ? | 5.60          |
 | ``CRM_Core_DAO::checkFieldExists``               |                 todo                 |                ? | 5.60          |
 | ``CRM_Core_Error::debug_log_message``            |         Civi::log()->debug           |                ? | not yet       |

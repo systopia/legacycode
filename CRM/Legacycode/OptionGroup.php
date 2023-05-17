@@ -58,4 +58,47 @@ class CRM_Legacycode_OptionGroup {
     // anything else to do here?
     return (string) $value;
   }
+
+  /**
+   * Get an option label from an option value
+   *
+   * This function was specifically introduced as 1:1 replacement
+   *  for the deprecated CRM_Core_OptionGroup::getLabel function
+   *
+   * @param string $group_name
+   *   name of the group
+   *
+   * @param string|int $value
+   *   option value
+   *
+   * @param bool $onlyActiveValue
+   *   should only active values be returned?
+   *
+   * @return string|null
+   *   label of the queried option value
+   */
+  public static function getLabel($group_name, $value, $onlyActiveValue = TRUE) {
+    if (empty($groupName) || $value === '' || $value === null) {
+      return NULL;
+    }
+
+    // build/run API query
+    $api_query = [
+      'option_group_id' => $group_name,
+      'value' => $value,
+      'return' => 'label'
+    ];
+
+    if ($onlyActiveValue) {
+      $api_query['is_active'] = 1;
+    }
+
+    try {
+      return civicrm_api3('OptionValue', 'getvalue', $api_query);
+    } catch (Exception $ex) {
+      Civi::log()->debug("CRM_Legacycode_OptionGroup::getLabel exception for value '{$value}' in group '{$group_name}': "
+          . $ex->getMessage());
+      return null;
+    }
+  }
 }
