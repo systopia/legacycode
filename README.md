@@ -24,7 +24,11 @@ extensions' compatibility issues.
 
 1. Check out your extension from a repository
 2. Open a shell and navigate into your extension's folder
-3. Run the following command:
+3. Run a simple scan command. This one should find all calls that are *removed* from current CiviCRM versions:
+```
+grep -r -E "(CRM_Core_OptionGroup::getValue|CRM_Contact_BAO_Contact::contactTrashRestore|CRM_Contact_BAO_Contact::getPhoneDetails|CRM_Core_DAO::checkFieldExists)" *
+```
+You can also run this one, to find *all* problematic calls, i.e. deprecated *and* removed:
 ```
 grep -r -E "(CRM_Core_OptionGroup::getValue|CRM_Contact_BAO_Contact::contactTrashRestore|CRM_Contact_BAO_Contact::getPhoneDetails|CRM_Core_DAO::checkFieldExists|CRM_Core_DAO::createTempTableName|CRM_Core_OptionGroup::getLabel|_civicrm_api3_field_names|CRM_Core_BAO_Location::deleteLocationBlocks|_ipn_process_transaction|CRM_Core_Error::debug_log_message)" *
 ```
