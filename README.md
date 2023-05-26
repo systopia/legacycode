@@ -26,11 +26,11 @@ extensions' compatibility issues.
 2. Open a shell and navigate into your extension's folder
 3. Run a simple scan command. This one should find all calls that are *removed* from current CiviCRM versions:
 ```
-grep -r -E "(CRM_Core_OptionGroup::getValue|CRM_Contact_BAO_Contact::contactTrashRestore|CRM_Contact_BAO_Contact::getPhoneDetails|CRM_Core_DAO::checkFieldExists)" *
+grep -r -E "(CRM_Core_OptionGroup::getValue|CRM_Contact_BAO_Contact::contactTrashRestore|CRM_Contact_BAO_Contact::getPhoneDetails|CRM_Core_DAO::checkFieldExists|CRM_Contact_BAO_Contact::getPhoneDetails|CRM_Core_DAO::createTempTableName|civicrm_api3_field_names|ation::deleteLocationBlocks|ipn_process_transaction)" *
 ```
 You can also run this one, to find *all* problematic calls, i.e. deprecated *and* removed:
 ```
-grep -r -E "(CRM_Core_OptionGroup::getValue|CRM_Contact_BAO_Contact::contactTrashRestore|CRM_Contact_BAO_Contact::getPhoneDetails|CRM_Core_DAO::checkFieldExists|CRM_Core_DAO::createTempTableName|CRM_Core_OptionGroup::getLabel|_civicrm_api3_field_names|CRM_Core_BAO_Location::deleteLocationBlocks|_ipn_process_transaction|CRM_Core_Error::debug_log_message)" *
+grep -r -E "(CRM_Core_OptionGroup::getValue|CRM_Contact_BAO_Contact::contactTrashRestore|CRM_Contact_BAO_Contact::getPhoneDetails|CRM_Core_DAO::checkFieldExists|CRM_Contact_BAO_Contact::getPhoneDetails|CRM_Core_DAO::createTempTableName|civicrm_api3_field_names|ation::deleteLocationBlocks|ipn_process_transaction|CRM_Core_Error::debug_log_message)" *
 ```
 4. Investigate each match and replace the calls according to the table below.
 5. Review your changes and create a commit
@@ -51,6 +51,10 @@ is part of it's dependencies, i.e. add the following to your extensions' ``info.
 | ``CRM_Core_OptionGroup::getLabel``               | CRM_Legacycode_OptionGroup::getLabel |                ? | 5.60          |
 | ``CRM_Contact_BAO_Contact::contactTrashRestore`` |                 todo                 |                ? | 5.60          |
 | ``CRM_Core_DAO::checkFieldExists``               |                 todo                 |                ? | 5.60          |
-| ``CRM_Core_Error::debug_log_message``            |         Civi::log()->debug           |                ? | not yet       |
+| ``CRM_Contact_BAO_Contact::getPhoneDetails``     |                 todo                 |                ? | 5.60          |
+| ``CRM_Core_DAO::createTempTableName``            |                 todo                 |                ? | 5.60          |
+| ``civicrm_api3_field_names``                     |                 todo                 |                ? | 5.60          |
+| ``CRM_Core_BAO_Location::deleteLocationBlocks``  |                 todo                 |                ? | 5.60          |
+| ``ipn_process_transaction``                      |                 todo                 |                ? | 5.60          |
+| ``CRM_Core_Error::debug_log_message``            |          Civi::log()->debug          |                ? | not yet       |
 | (more to come)                                   |                 todo                 |                  |               |
-
