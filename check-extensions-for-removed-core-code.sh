@@ -62,7 +62,7 @@ ENV="${*:$OPTIND:1}"
 # starting with '#' or '//'.
 #-------------------------------------------------------------------------------
 SEARCH_PATTERN="$(printf "|%s" "${DEPRECATED_CODE[@]}")"
-SEARCH_PATTERN="^(?!#)(?!//).*(${SEARCH_PATTERN:1})"
+SEARCH_PATTERN="^(?!\*)(?!//).*(${SEARCH_PATTERN:1})"
 
 #-------------------------------------------------------------------------------
 # Get path to extension folder.
