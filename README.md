@@ -55,7 +55,7 @@ is part of it's dependencies, i.e. add the following to your extensions' ``info.
 | ``CRM_Contact_BAO_Contact::contactTrashRestore`` |                     todo                     |                ? | 5.60          |
 | ``CRM_Core_DAO::checkFieldExists``               |                     todo                     |                ? | 5.60          |
 | ``CRM_Contact_BAO_Contact::getPhoneDetails``     |                     todo                     |                ? | 5.60          |
-| ``CRM_Core_DAO::createTempTableName``            |                     todo                     |                ? | 5.60          |
+| ``CRM_Core_DAO::createTempTableName``            | CRM_Legacycode_Core_DAO::createTempTableName |                ? | 5.60          |
 | ``civicrm_api3_field_names``                     |                     todo                     |                ? | 5.60          |
 | ``CRM_Core_BAO_Location::deleteLocationBlocks``  |                     todo                     |                ? | 5.60          |
 | ``ipn_process_transaction``                      |                     todo                     |                ? | 5.60          |
