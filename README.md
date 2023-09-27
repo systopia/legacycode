@@ -6,14 +6,14 @@ The extension is licensed under [AGPL-3.0](LICENSE.txt).
 
 ## Purpose
 
-The purpose of *this* extension is to offer in-line replacements for functions
+The purpose of *this* extension is to offer replacements for functions
 that have been deprecated or even removed from the CiviCRM Core.
 
-Of course, in an ideal world we'd be resolving this by replacing these function
+Of course, you *should* resolving this by replacing these function
 calls with a well-designed piece of code to exactly the same thing that the old
-function did, but in a clean and up-to-date way. Since that might be a lot of work,
-we designed this extension to offer a quick, temporary solution to your
-extensions' compatibility issues.
+function did for you, but in a clean and up-to-date way.
+Since that might be a lot of work, we designed this extension to offer a quick,
+temporary solution to your extensions' compatibility issues.
 
 ## Requirements
 
@@ -32,16 +32,37 @@ You can also run this one, to find *all* problematic calls, i.e. deprecated *and
 ```
 grep -r -E "(CRM_Utils_Token::replaceOrgTokens|CRM_Activity_Form_Task_PDFLetterCommon|PDFLetterCommon::postProcess|CRM_Core_OptionGroup::getValue|CRM_Contact_BAO_Contact::contactTrashRestore|CRM_Contact_BAO_Contact::getPhoneDetails|CRM_Core_DAO::checkFieldExists|CRM_Contact_BAO_Contact::getPhoneDetails|CRM_Core_DAO::createTempTableName|civicrm_api3_field_names|ation::deleteLocationBlocks|ipn_process_transaction|CRM_Core_Form_Date::buildDateRange|CRM_Core_Form_Date::returnDateRangeSelector|CRM_Core_Form_Date::addDateRangeToForm|CRM_Core_Error::debug_log_message)" *
 ```
-4. Investigate each match and replace the calls according to the table below.
-5. Review your changes and create a commit
-6. If you made any changes to your extension, make sure the ``lagacycode`` extension
-is part of it's dependencies, i.e. add the following to your extensions' ``info.xml``:
+
+## How to fix your extension
+
+### Alternative 1: Use this extension **as a dependency**
+1. Investigate each match and replace all calls in your extension according to the table below.
+2. Add the ``lagacycode`` extension as part of it's dependencies, i.e. add the following to your extensions' ``info.xml``:
+    ```
+    <requires>
+      <ext>legacycode</ext>
+    </requires>
+    ```
+3. Review your changes and create a commit
+4. If you made any changes to your extension, make sure the ``lagacycode`` extension
 ```
 <requires>
   <ext>legacycode</ext>
 </requires>
 ```
-7. Create a new release for your extension.
+5. Create a new release for your extension.
+6. **Advantage**: minimally invasive
+7. **Disadvantage**: extension dependency
+
+### Alternative 2: Copy the replacment code into your extension
+1. Investigate each match in the table below and find out which class provides the discontinued function, e.g. ``CRM_Legacycode_OptionGroup::getValue``
+2. Copy that class into your extension, e.g. into ``CRM/EXTENSION/Legacycode/OptionGroup.php``, where 'EXTENSION' should be your extension's namespace.
+3. Adjust the class name accordingly, e.g. ``CRM_Mything_Legacycode_OptionGroup``
+4. Replace all calls in your extension, e.g. ``CRM_Mything_Legacycode_OptionGroup::getValue``
+5. Create a new release for your extension.
+6. **Advantage**: no extension dependency
+7. **Disadvantage**: more work
+
 
 ## Function Replacements
 
