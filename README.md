@@ -63,6 +63,8 @@ grep -r -E "(CRM_Utils_Token::replaceOrgTokens|CRM_Activity_Form_Task_PDFLetterC
 6. **Advantage**: no extension dependency
 7. **Disadvantage**: more work
 
+You can find an example [here](https://github.com/Project60/org.project60.membership/pull/67/commits/9c7c07b80f50872907f45f1c2632c7bdd334e31c)
+
 
 ## Function Replacements
 
