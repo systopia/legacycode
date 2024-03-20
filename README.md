@@ -30,7 +30,7 @@ grep -r -E "(CRM_Utils_Token::replaceOrgTokens|CRM_Activity_Form_Task_PDFLetterC
 ```
 You can also run this one, to find *all* problematic calls, i.e. deprecated *and* removed:
 ```
-grep -r -E "(CRM_Utils_Token::replaceOrgTokens|CRM_Activity_Form_Task_PDFLetterCommon|PDFLetterCommon::postProcess|CRM_Core_OptionGroup::getValue|CRM_Core_OptionGroup::getLabel|CRM_Contact_BAO_Contact::contactTrashRestore|CRM_Contact_BAO_Contact::getPhoneDetails|CRM_Core_DAO::checkFieldExists|CRM_Contact_BAO_Contact::getPhoneDetails|CRM_Core_DAO::createTempTableName|civicrm_api3_field_names|ation::deleteLocationBlocks|ipn_process_transaction|CRM_Core_Form_Date::buildDateRange|CRM_Core_Form_Date::returnDateRangeSelector|CRM_Core_Form_Date::addDateRangeToForm|CRM_Core_Error::debug_log_message|CRM_Core_DAO::executeSql|getContactRelationshipSelector)" *
+grep -r -E "(CRM_Utils_Token::replaceOrgTokens|CRM_Activity_Form_Task_PDFLetterCommon|PDFLetterCommon::postProcess|CRM_Core_OptionGroup::getValue|CRM_Core_OptionGroup::getLabel|CRM_Contact_BAO_Contact::contactTrashRestore|CRM_Contact_BAO_Contact::getPhoneDetails|CRM_Core_DAO::checkFieldExists|CRM_Contact_BAO_Contact::getPhoneDetails|CRM_Core_DAO::createTempTableName|civicrm_api3_field_names|ation::deleteLocationBlocks|ipn_process_transaction|CRM_Core_Form_Date::buildDateRange|CRM_Core_Form_Date::returnDateRangeSelector|CRM_Core_Form_Date::addDateRangeToForm|CRM_Core_Error::debug_log_message|CRM_Core_DAO::executeSql|::getContactRelationshipSelector|::getContactRelationships)" *
 ```
 
 ## How to fix your extension
@@ -87,5 +87,6 @@ You can find an example [here](https://github.com/Project60/org.project60.member
 | ``CRM_Core_Form_Date::returnDateRangeSelector``  | CRM_Legacycode_Date::returnDateRangeSelector |                ? | 5.61          |
 | ``CRM_Core_Form_Date::addDateRangeToForm``       |   CRM_Legacycode_Date::addDateRangeToForm    |                ? | 5.61          |
 | ``CRM_Contact_BAO_Relationship::getContactRelationshipSelector``            |                      ?                       |                ? | 5.74       |
+| ``CRM_Contact_Page_AJAX::getContactRelationships``            |                      ?                       |                ? | 5.74       |
 | ``CRM_Core_Error::debug_log_message``            |              Civi::log()->debug              |                ? | not yet       |
 | (more to come)                                   |                     todo                     |                  |               |
