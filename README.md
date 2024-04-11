@@ -90,3 +90,9 @@ You can find an example [here](https://github.com/Project60/org.project60.member
 | ``CRM_Contact_Page_AJAX::getContactRelationships``            |                      ?                       |                ? | 5.74       |
 | ``CRM_Core_Error::debug_log_message``            |              Civi::log()->debug              |                ? | not yet       |
 | (more to come)                                   |                     todo                     |                  |               |
+
+
+
+## Incomplete or wrong information
+
+Since this aims to be a collection of some very volatile information, PRs are *very* welcome!
