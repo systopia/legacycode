@@ -1,0 +1,32 @@
+<?php
+
+declare(strict_types = 1);
+
+use Rector\Config\RectorConfig;
+use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
+use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
+use Rector\Set\ValueObject\SetList;
+use Rector\ValueObject\PhpVersion;
+
+return RectorConfig::configure()
+  ->withPaths([
+      __DIR__ . '/CRM',
+      __DIR__ . '/legacycode.php',
+      //__DIR__ . '/tests',
+  ])
+  ->withSkip([
+      __DIR__ . '/vendor',
+      __DIR__ . '/CRM/*/DAO',
+      __DIR__ . '/CRM/*/DAO/*',
+      __DIR__ . '/tools',
+      ClassPropertyAssignToConstructorPromotionRector::class,
+      AddVoidReturnTypeWhereNoReturnRector::class,
+  ])
+  ->withSets([
+      SetList::CODE_QUALITY,
+      SetList::DEAD_CODE,
+      //SetList::TYPE_DECLARATION,
+      SetList::EARLY_RETURN,
+  ])
+  ->withPhpVersion(PhpVersion::PHP_82)
+  ->withPhpSets(php82: true);

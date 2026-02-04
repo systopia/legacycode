@@ -1,16 +1,16 @@
 <?php
 
-require_once 'legacycode.civix.php';
-// phpcs:disable
-use CRM_Legacycode_ExtensionUtil as E;
-// phpcs:enable
+declare(strict_types = 1);
+
+// phpcs:disable PSR1.Files.SideEffects.FoundWithSymbols
+require_once __DIR__ . '/legacycode.civix.php';
 
 /**
  * Implements hook_civicrm_config().
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_config/
  */
-function legacycode_civicrm_config(&$config): void {
+function legacycode_civicrm_config(CRM_Core_Config &$config): void {
   _legacycode_civix_civicrm_config($config);
 }
 
@@ -31,31 +31,3 @@ function legacycode_civicrm_install(): void {
 function legacycode_civicrm_enable(): void {
   _legacycode_civix_civicrm_enable();
 }
-
-// --- Functions below this ship commented out. Uncomment as required. ---
-
-/**
- * Implements hook_civicrm_preProcess().
- *
- * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_preProcess
- */
-//function legacycode_civicrm_preProcess($formName, &$form): void {
-//
-//}
-
-/**
- * Implements hook_civicrm_navigationMenu().
- *
- * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_navigationMenu
- */
-//function legacycode_civicrm_navigationMenu(&$menu): void {
-//  _legacycode_civix_insert_navigation_menu($menu, 'Mailings', [
-//    'label' => E::ts('New subliminal message'),
-//    'name' => 'mailing_subliminal_message',
-//    'url' => 'civicrm/mailing/subliminal',
-//    'permission' => 'access CiviMail',
-//    'operator' => 'OR',
-//    'separator' => 0,
-//  ]);
-//  _legacycode_civix_navigationMenu($menu);
-//}

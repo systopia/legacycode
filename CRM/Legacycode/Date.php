@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*-------------------------------------------------------+
 | SYSTOPIA - LEGACY CODE INLINE-REPLACEMENTS             |
 +--------------------------------------------------------+
@@ -37,23 +37,41 @@ class CRM_Legacycode_Date {
    * @param array $attributes
    */
   public static function buildDateRange(
-    &$form, $fieldName, $count = 1,
-    $from = '_from', $to = '_to', $fromLabel = 'From:',
-    $required = FALSE, $operators = [],
-    $dateFormat = 'searchDate', $displayTime = FALSE,
+    &$form,
+    $fieldName,
+    $count = 1,
+    $from = '_from',
+    $to = '_to',
+    $fromLabel = 'From:',
+    $required = FALSE,
+    $operators = [],
+    $dateFormat = 'searchDate',
+    $displayTime = FALSE,
     $attributes = ['class' => 'crm-select2']
-  ) {
+  ): void {
     $selector
       = self::returnDateRangeSelector(
-      $form, $fieldName, $count,
-      $from, $to, $fromLabel,
-      $required, $operators,
-      $dateFormat, $displayTime
+      $form,
+      $fieldName,
+      $count,
+      $from,
+      $to,
+      $fromLabel,
+      $required,
+      $operators,
+      $dateFormat,
+      $displayTime
     );
     self::addDateRangeToForm(
-      $form, $fieldName, $selector,
-      $from, $to, $fromLabel,
-      $required, $dateFormat, $displayTime,
+      $form,
+      $fieldName,
+      $selector,
+      $from,
+      $to,
+      $fromLabel,
+      $required,
+      $dateFormat,
+      $displayTime,
       $attributes
     );
   }
@@ -82,17 +100,23 @@ class CRM_Legacycode_Date {
    *   Values for Selector
    */
   public static function returnDateRangeSelector(
-    &$form, $fieldName, $count = 1,
-    $from = '_from', $to = '_to', $fromLabel = 'From:',
-    $required = FALSE, $operators = [],
-    $dateFormat = 'searchDate', $displayTime = FALSE
+    &$form,
+    $fieldName,
+    $count = 1,
+    $from = '_from',
+    $to = '_to',
+    $fromLabel = 'From:',
+    $required = FALSE,
+    $operators = [],
+    $dateFormat = 'searchDate',
+    $displayTime = FALSE
   ) {
     $selector = [
       '' => ts('- any -'),
       0 => ts('Choose Date Range'),
     ];
     // CRM-16195 Pull relative date filters from an option group
-    $selector = $selector + CRM_Core_OptionGroup::values('relative_date_filters');
+    $selector += CRM_Core_OptionGroup::values('relative_date_filters');
 
     if (is_array($operators)) {
       $selector = array_merge($selector, $operators);
@@ -101,7 +125,7 @@ class CRM_Legacycode_Date {
     $config = CRM_Core_Config::singleton();
     //if fiscal year start on 1 jan then remove fiscal year task
     //form list
-    if ($config->fiscalYearStart['d'] == 1 & $config->fiscalYearStart['M'] == 1) {
+    if (($config->fiscalYearStart['d'] === 1 & $config->fiscalYearStart['M'] === 1) !== 0) {
       unset($selector['this.fiscal_year']);
       unset($selector['previous.fiscal_year']);
     }
@@ -138,15 +162,17 @@ class CRM_Legacycode_Date {
     $dateFormat,
     $displayTime,
     $attributes
-  ) {
-    $form->add('select',
-               "{$fieldName}_relative",
-               ts('Relative Date Range'),
-               $selector,
-               $required,
-               $attributes
+  ): void {
+    $form->add(
+      'select',
+      "{$fieldName}_relative",
+      ts('Relative Date Range'),
+      $selector,
+      $required,
+      $attributes
     );
 
     $form->addDateRange($fieldName, $from, $to, $fromLabel, $dateFormat, FALSE, $displayTime);
   }
+
 }

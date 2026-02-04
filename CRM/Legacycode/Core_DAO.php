@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*-------------------------------------------------------+
 | SYSTOPIA - LEGACY CODE INLINE-REPLACEMENTS             |
 +--------------------------------------------------------+
@@ -15,29 +15,31 @@
  * This class offers in-line code replacements for deprecated/dropped functions
  *  of the CRM_Core_DAO class
  */
-class CRM_Legacycode_Core_DAO
-{
-    /**
-     * @param string $prefix
-     * @param bool $addRandomString
-     * @param null $string
-     *
-     * @return string
-     * @deprecated
-     * @see CRM_Utils_SQL_TempTable
-     */
-    public static function createTempTableName($prefix = 'civicrm', $addRandomString = true, $string = null)
-    {
-        CRM_Core_Error::deprecatedFunctionWarning('Use CRM_Utils_SQL_TempTable interface to create temporary tables');
-        $tableName = $prefix . "_temp";
+class CRM_Legacycode_Core_DAO {
 
-        if ($addRandomString) {
-            if ($string) {
-                $tableName .= "_" . $string;
-            } else {
-                $tableName .= "_" . md5(uniqid('', true));
-            }
-        }
-        return $tableName;
+  /**
+   *
+   * @return string
+   * @deprecated
+   * @see CRM_Utils_SQL_TempTable
+   */
+  public static function createTempTableName(
+    string $prefix = 'civicrm',
+    bool $addRandomString = TRUE,
+    string $string = NULL
+  ) {
+    CRM_Core_Error::deprecatedFunctionWarning('Use CRM_Utils_SQL_TempTable interface to create temporary tables');
+    $tableName = $prefix . '_temp';
+
+    if ($addRandomString) {
+      if ($string !== NULL) {
+        $tableName .= '_' . $string;
+      }
+      else {
+        $tableName .= '_' . md5(uniqid('', TRUE));
+      }
     }
+    return $tableName;
+  }
+
 }

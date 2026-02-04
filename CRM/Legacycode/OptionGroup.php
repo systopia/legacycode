@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*-------------------------------------------------------+
 | SYSTOPIA - LEGACY CODE INLINE-REPLACEMENTS             |
 +--------------------------------------------------------+
@@ -16,16 +16,17 @@
  *  of the CRM_Core_OptionGroup class
  */
 class CRM_Legacycode_OptionGroup {
+
   /**
    * Get an option value from an option group
    *
    * This function was specifically introduced as 1:1 replacement
    *  for the deprecated CRM_Core_OptionGroup::getValue function
    *
-   * @param string $groupName
+   * @param string $group_name
    *   name of the group
    *
-   * @param $label
+   * @param string $label
    *   label/name of the requested option value
    *
    * @param string $label_field
@@ -37,14 +38,19 @@ class CRM_Legacycode_OptionGroup {
    * @param string $value_field
    *   *ignored*
    *
-   * @return string
+   * @return ?string
    *   value of the OptionValue entity if found
    *
    * @throws Exception
    */
-  public static function getValue($group_name, $label, $label_field = 'label', $label_type = 'String', $value_field = 'value')
-  {
-    if (empty($label) || empty($group_name)) {
+  public static function getValue(
+    string $group_name,
+    string $label,
+    string $label_field = 'label',
+    string $label_type = 'String',
+    string $value_field = 'value'
+  ): ?string {
+    if ($label === '' || $label === '0' || ($group_name === '' || $group_name === '0')) {
       return NULL;
     }
 
@@ -52,7 +58,7 @@ class CRM_Legacycode_OptionGroup {
     $value = civicrm_api3('OptionValue', 'getvalue', [
       'option_group_id' => $group_name,
       $label_field => $label,
-      'return' => $value_field
+      'return' => $value_field,
     ]);
 
     // anything else to do here?
@@ -68,7 +74,7 @@ class CRM_Legacycode_OptionGroup {
    * @param string $group_name
    *   name of the group
    *
-   * @param string|int $value
+   * @param string|int|null $value
    *   option value
    *
    * @param bool $onlyActiveValue
@@ -77,8 +83,8 @@ class CRM_Legacycode_OptionGroup {
    * @return string|null
    *   label of the queried option value
    */
-  public static function getLabel($group_name, $value, $onlyActiveValue = TRUE) {
-    if (empty($groupName) || $value === '' || $value === null) {
+  public static function getLabel(string $group_name, string|int|null $value, bool $onlyActiveValue = TRUE): ?string {
+    if ($group_name !== '' || $value === '' || $value === NULL) {
       return NULL;
     }
 
@@ -86,7 +92,7 @@ class CRM_Legacycode_OptionGroup {
     $api_query = [
       'option_group_id' => $group_name,
       'value' => $value,
-      'return' => 'label'
+      'return' => 'label',
     ];
 
     if ($onlyActiveValue) {
@@ -95,10 +101,14 @@ class CRM_Legacycode_OptionGroup {
 
     try {
       return civicrm_api3('OptionValue', 'getvalue', $api_query);
-    } catch (Exception $ex) {
-      Civi::log()->debug("CRM_Legacycode_OptionGroup::getLabel exception for value '{$value}' in group '{$group_name}': "
-          . $ex->getMessage());
-      return null;
+    }
+    catch (CRM_Core_Exception $ex) {
+      Civi::log()->debug(
+        "CRM_Legacycode_OptionGroup::getLabel exception for value '{$value}' in group '{$group_name}': "
+        . $ex->getMessage()
+          );
+      return NULL;
     }
   }
+
 }
